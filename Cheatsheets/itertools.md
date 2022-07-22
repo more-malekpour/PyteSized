@@ -1,6 +1,7 @@
 # Python's *itertools* Cheatsheet
 
 - [Python's *itertools* Cheatsheet](#pythons-itertools-cheatsheet)
+    - [Introduction](#introduction)
     - [Permutation, Combination, and Product](#permutation-combination-and-product)
     - [Repeat, Cycle, and Count](#repeat-cycle-and-count)
     - [Compress and Filterfalse](#compress-and-filterfalse)
@@ -9,6 +10,16 @@
     - [Chain and Tee](#chain-and-tee)
     - [Accumulate](#accumulate)
     - [Miscellaneous](#miscellaneous)
+
+### Introduction
+There are multiple ways of creating iterator in Python. The easiest way is using built-in `iter` function. Another way is using comprehension with paranthesis instead of bracket. After converting a sequence to an iterator, functions such as `next` can be used.
+
+```Python
+>>> import itertools as it
+>>> sequence = [1, 2, 3, 4]
+>>> iterator_1 = iter(sequence)
+>>> iterator_2 = (item for item in sequence)
+```
 
 ### Permutation, Combination, and Product
 The `permutations` are used when order/sequence of arrangement is needed, while the `combinations` are used to find the number of possible groups which can be formed.
@@ -130,6 +141,7 @@ Unlike the convenient `groupby` function, the `it.groupby` returns grouped eleme
 >>>             {'name': 'Aaron', 'age': 14},
 >>>             {'name': 'Jacob', 'age': 18},
 >>>             {'name': 'Marry', 'age': 18}]
+
 >>> it.groupby(students, lambda x: x['age'])
 Key 14: [{'name': 'David', 'age': 14}]
 Key 18: [{'name': 'Jesus', 'age': 18}]
@@ -151,6 +163,12 @@ The `chain` simply takes a number of iterables and returns them as one long iter
 # Chains multiple iterators together.
 
 >>> it.chain('wx', 'yz')
+'w', 'x', 'y', 'z'
+
+>>> it.chain.from_iterable()
+# Takes a single iterable of multiple iterables and chains them.
+
+>>> it.chain.from_iterable(['wx', 'yz'])
 'w', 'x', 'y', 'z'
 ```
 
